@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; background: #050914; }
+body { @apply bg-ink font-sans text-slate-300 antialiased; }
+section[id] { scroll-margin-top: 5rem; }
+
+::selection { background: rgba(139, 92, 246, 0.45); color: #fff; }
+:focus-visible { outline: 2px solid #22d3ee; outline-offset: 3px; border-radius: 6px; }
+
+/* custom scrollbar */
+* { scrollbar-width: thin; scrollbar-color: #3b82f6 #080e20; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #080e20; }
+::-webkit-scrollbar-thumb { background: linear-gradient(#3b82f6, #8b5cf6); border-radius: 8px; }
+
+@layer components {
+  .glass { @apply border border-white/10 bg-white/[0.04] backdrop-blur-md; }
+  .grad-text { @apply bg-gradient-to-r from-electric via-violet-glow to-cyan-glow bg-clip-text text-transparent; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition duration-200; }
+  .btn-primary { @apply btn bg-gradient-to-r from-electric to-violet-glow text-white shadow-lg shadow-electric/20 hover:-translate-y-0.5 hover:shadow-violet-glow/30; }
+  .btn-ghost { @apply btn glass text-slate-100 hover:-translate-y-0.5 hover:border-cyan-glow/50 hover:text-white; }
+  .chip { @apply rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-slate-300; }
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+}
+
+@keyframes drift { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(30px,-24px,0); } }
+.orb { animation: drift 16s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .orb { animation: none; }
+}
